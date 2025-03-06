@@ -10,9 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/user', user);
+
 app.use('/event', event);
 app.use('/attendance', attendance);
+app.use('/user', user);
 
 app.listen(3001, () =>
     console.log('Server running on port 3001'));
