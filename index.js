@@ -11,6 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/user', user);
+
 const tokenValidation =(req, res, next)=>{
 
     const authorization = req.headers['authorization']
@@ -32,7 +34,7 @@ const tokenValidation =(req, res, next)=>{
 
 app.use('/', tokenValidation, event);
 app.use('/attendance', tokenValidation, attendance);
-app.use('/user', user);
+
 
 app.post('/validateSesion', tokenValidation, (req, res) => {
     res.json({ message: "Valid Token"})
