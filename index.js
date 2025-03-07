@@ -34,8 +34,6 @@ const tokenValidation =(req, res, next)=>{
 
 app.use('/', tokenValidation, event);
 app.use('/attendance', tokenValidation, attendance);
-
-
 app.post('/validateSesion', tokenValidation, (req, res) => {
     res.json({ message: "Valid Token"})
 })
