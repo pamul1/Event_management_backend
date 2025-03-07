@@ -44,8 +44,8 @@ export const postEvent = async (req, res) => {
     }
 
     try {
-        const str = 'insert into events ( event_id, title, date, location, description, email) values ($1, $2, $3, $4, $5, $6)'
-        const arr = [tmp.event_id, tmp.title, tmp.date, tmp.location, tmp.description, tmp.email]
+        const str = 'insert into events ( title, date, location, description, email) values ($1, $2, $3, $4, $5)'
+        const arr = [tmp.title, tmp.date, tmp.location, tmp.description, tmp.email]
         const result = await db.query(str, arr)
         res.status(200).json({ message: "Event Added" })
         return
@@ -92,7 +92,7 @@ export const putEvent = async (req, res) => {
     }
 
     try {
-        const str = 'update from events set title = $1, date = $2, location = $3, descrition = $4, email = $5 where event_id = $6'
+        const str = 'update from events set title = $1, date = $2, location = $3, descrition = $4, email = $5 where id = $6'
         const arr = [tmp.title, tmp.date, tmp.location, tmp.description, tmp.email, event_id]
         const result = await db.query(str, arr)
         res.status(200).json({ message: "Event Updated" })
@@ -113,7 +113,7 @@ export const deleteEvent = async (req, res) => {
     }
 
     try {
-        const str = 'delete from events where event_id = $1'
+        const str = 'delete from events where id = $1'
         const arr = [event_id]
         const result = await db.query(str, arr)
         res.status(200).json({ message: "Event Deleted" })
