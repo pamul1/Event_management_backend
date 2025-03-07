@@ -1,9 +1,10 @@
 import { db } from "../cn.js"
 
 export const getEvent = async (req, res) => {
-
-    const sql = `select * from event`;
-    const result = await db.query(sql)
+    
+    const email = req.params.email
+    const sql = `select * from events where email = $1`;
+    const result = await db.query(sql, [email])
     res.status(200).json(result)
 
 }
