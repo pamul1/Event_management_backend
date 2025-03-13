@@ -13,11 +13,6 @@ export const postEvent = async (req, res) => {
 
     const tmp = req.body
 
-    if (!tmp.event_id) {
-        res.status(300).json({ message: "Field event_id is empty" })
-        return
-    }
-
     if (!tmp.title) {
         res.status(300).json({ message: "Field title is empty" })
         return
