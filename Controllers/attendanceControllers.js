@@ -23,9 +23,14 @@ export const postAttendance = async (req, res) => {
         return
     }
 
+    if (!tmp.event_id) {
+        res.status(300).json({ message: "Field event_id is empty" })
+        return
+    }
+
     try {
         const str = 'insert into attendance (event_id, name, date,) values ($1, $2, $3)'
-        const arr = [tmp.name, tmp.date, event_id]
+        const arr = [tmp.name, tmp.date, temp.event_id]
         const result = await db.query(str, arr)
         res.status(200).json({ message: "Attendance Added" })
         return
