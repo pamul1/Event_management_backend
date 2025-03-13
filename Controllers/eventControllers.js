@@ -28,19 +28,14 @@ export const postEvent = async (req, res) => {
         return
     }
 
-    if (!tmp.description) {
-        res.status(300).json({ message: "Field description is empty" })
-        return
-    }
-
     if (!tmp.email) {
         res.status(300).json({ message: "Field email is empty" })
         return
     }
 
     try {
-        const str = 'insert into events ( title, date, location, description, email) values ($1, $2, $3, $4, $5)'
-        const arr = [tmp.title, tmp.date, tmp.location, tmp.description, tmp.email]
+        const str = 'insert into events ( title, date, location,  email) values ($1, $2, $3, $4)'
+        const arr = [tmp.title, tmp.date, tmp.location,  tmp.email]
         const result = await db.query(str, arr)
         res.status(200).json({ message: "Event Added" })
         return
