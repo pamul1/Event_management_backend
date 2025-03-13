@@ -2,8 +2,9 @@ import { db } from "../cn.js"
 
 export const getAttendance = async (req, res) => {
 
-    const sql = "select name, to_char(date,'yyyy-mm-dd') date , attendance_id  from attendance"
-    const result = await db.query(sql)
+    const event_id  = req.params.event_id
+    const sql = "select attendee_name, to_char(attendance_date,'yyyy-mm-dd') attendance_date , id  from attendance where event_id  = $1"
+    const result = await db.query(sql, [event_id])
     res.status(200).json(result)
 
 }
