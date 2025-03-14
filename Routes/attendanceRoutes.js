@@ -5,4 +5,4 @@ import { getAttendance, postAttendance, deleteAttendance } from '../Controllers/
 
 attendance.get('/:event_id', getAttendance)
 attendance.post('/', postAttendance)
-attendance.attendance('/:id', deleteAttendance)
+attendance.delete('/:id', deleteAttendance)
