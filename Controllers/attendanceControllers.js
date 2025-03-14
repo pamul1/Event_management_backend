@@ -3,7 +3,7 @@ import { db } from "../cn.js"
 export const getAttendance = async (req, res) => {
 
     const event_id  = req.params.event_id
-    const sql = "select attendee_name, to_char(attendance_date,'yyyy-mm-dd') attendance_date , id  from attendance where event_id  = $1"
+    const sql = "select attendee_name, to_char(attendance_date,'yyyy-mm-dd') attendance_date , id from attendance where event_id = $1"
     const result = await db.query(sql, [event_id])
     res.status(200).json(result)
 
@@ -36,6 +36,28 @@ export const postAttendance = async (req, res) => {
         return
     } catch (err) {
         res.status(500).json({ message: err.message})
+        return
+    }
+
+}
+
+export const deleteAttendance = async (req, res) => {
+
+    const event_id = req.params.id
+
+    if (!event_id) {
+        res.status(300).json({ message: "Field event_id is empty" })
+        return
+    }
+
+    try {
+        const str = 'delete from attendance where id = $1'
+        const arr = [event_id]
+        const result = await db.query(str, arr)
+        res.status(200).json({ message: "attendance Deleted" })
+        return
+    } catch (err) {
+        res.status(500).json({ message: err.message })
         return
     }
 
